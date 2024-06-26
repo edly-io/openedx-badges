@@ -115,7 +115,6 @@ def course_badge_check(user, course_key):
     Takes a GeneratedCertificate instance, and checks to see if a badge exists for this course, creating
     it if not, should conditions be right.
     """
-    import pdb; pdb.set_trace();
     # TODO: Add issue_badges in the Advanced Setting of the course and remove this.
     # if not modulestore().get_course(course_key).issue_badges:
     #     LOGGER.info("Course is not configured to issue badges.")

@@ -94,7 +94,7 @@ class BadgrBackend(BadgeBackend):
         """
         try:
             response.raise_for_status()
-        except HTTPError:
+        except Exception:
             LOGGER.error(
                 "Encountered an error when contacting the Badgr-Server. Request sent to %r with headers %r.\n"
                 "and data values %r\n"
@@ -123,7 +123,7 @@ class BadgrBackend(BadgeBackend):
         except Exception as e:  # pylint: disable=broad-except
             LOGGER.error(f"Error opening an image: {e}")
             return None
-    
+
     def _create_badge(self, badge_class):
         """
         Create the badge class on Badgr.
@@ -254,14 +254,11 @@ class BadgrBackend(BadgeBackend):
         data = {
             'username': settings.BADGR_USERNAME,
             'password': settings.BADGR_PASSWORD,
-            'grant_type': 'password',
-            'client_id': 'public'
         }
         if refresh_token:
             data = {
                 'grant_type': 'refresh_token',
                 'refresh_token': refresh_token,
-                'client_id': 'public'
             }
 
         oauth_url = "{}/o/token".format(settings.BADGR_BASE_URL)

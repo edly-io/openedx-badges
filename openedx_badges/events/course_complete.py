@@ -94,9 +94,6 @@ def get_completion_badge(course_id, user):
         return None
     mode = badge_classes[0].mode
     course = modulestore().get_course(course_id)
-    # TODO: Add this in the Advance settings of the course
-    # if not course.issue_badges:
-    #     return None
     return BadgeClass.get_badge_class(
         slug=course_slug(course_id, mode),
         issuing_component='',
@@ -115,10 +112,9 @@ def course_badge_check(user, course_key):
     Takes a GeneratedCertificate instance, and checks to see if a badge exists for this course, creating
     it if not, should conditions be right.
     """
-    # TODO: Add issue_badges in the Advanced Setting of the course and remove this.
-    # if not modulestore().get_course(course_key).issue_badges:
-    #     LOGGER.info("Course is not configured to issue badges.")
-    #     return
+    if not modulestore().get_course(course_key).issue_badges:
+        LOGGER.info("Course is not configured to issue badges.")
+        return
     badge_class = get_completion_badge(course_key, user)
     if not badge_class:
         # We're not configured to make a badge for this course mode.

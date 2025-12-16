@@ -86,9 +86,8 @@ class BadgeClass(models.Model):
         """
         slug = slug.lower()
         issuing_component = issuing_component.lower()
-        # TODO: Add this in the Advance settings of the course and uncommend this
-        # if course_id and not modulestore().get_course(course_id).issue_badges:
-        #     raise CourseBadgesDisabledError("This course does not have badges enabled.")
+        if course_id and not modulestore().get_course(course_id).issue_badges:
+            raise CourseBadgesDisabledError("This course does not have badges enabled.")
         if not course_id:
             course_id = CourseKeyField.Empty
         try:

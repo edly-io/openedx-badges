@@ -23,7 +23,7 @@ This Django app integrates Open Badges support into Open edX using a Badgr-compa
 
 ---
 
-## Important: add the following field to the `CourseFields` class in `xmodule`:
+## Add the `issue_badges` field to the `CourseFields` class in `xmodule`:
 
 ```python
 issue_badges = Boolean(
@@ -36,7 +36,7 @@ issue_badges = Boolean(
 )
 ````
 
-This field enables per-course control over badge issuance.
+This field enables per-course control over badge issuance. Without it, badges are enabled for all courses by default, and the feature cannot be toggled at the course level via Advanced Settings.
 
 ---
 
